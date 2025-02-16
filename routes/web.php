@@ -40,12 +40,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/users', function(Request $request){
-
-    $users = User::all();
-    dump($users->toArray());
-    dump($request->user());
-});
 
 
 Route::resource('people', PeopleController::class)
@@ -56,8 +50,5 @@ Route::resource('people.transactions', TransactionController::class)
     ->only(['index', 'store'])
     ->middleware('auth');
 
-Route::get('/dev',function(){
-    return Transaction::paginate(5);
-});
 
 require __DIR__.'/auth.php';
